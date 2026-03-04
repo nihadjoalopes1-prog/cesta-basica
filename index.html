@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ficha Cadastral – Cesta Básica | Sara Palhoça Social</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --forest:   #1a3c2e;
+      --sage:     #3d7a5c;
+      --mint:     #6fbf97;
+      --foam:     #c8ead8;
+      --parchment:#f5f0e8;
+      --warm:     #fdfaf4;
+      --ink:      #1c2b24;
+      --dust:     #7a907f;
+      --gold:     #c9a84c;
+      --r:        12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--parchment);
+      font-family: 'Outfit', sans-serif;
+      color: var(--ink);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 15% 10%, rgba(111,191,151,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 85% 80%, rgba(26,60,46,0.12) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      background: var(--forest);
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 120% 80% at 0% 100%, rgba(111,191,151,0.25) 0%, transparent 55%),
+        radial-gradient(ellipse 80% 100% at 100% 0%, rgba(201,168,76,0.15) 0%, transparent 50%);
+    }
+
+    .hero-lines { position: absolute; inset: 0; overflow: hidden; }
+    .hero-lines span {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .hero-lines span:nth-child(1) { width:500px; height:500px; top:-200px; right:-100px; }
+    .hero-lines span:nth-child(2) { width:300px; height:300px; bottom:-100px; left:-80px; }
+    .hero-lines span:nth-child(3) { width:200px; height:200px; top:20px; left:30%; }
+
+    .hero-content {
+      position: relative; z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 52px 32px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50px;
+      padding: 6px 18px;
+      margin-bottom: 24px;
+      animation: fadeDown 0.7s ease both;
+    }
+
+    .badge-dot {
+      width: 7px; height: 7px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50%      { opacity:0.5; transform:scale(1.3); }
+    }
+
+    .badge span {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .hero-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.2rem;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1;
+      letter-spacing: -1px;
+      animation: fadeDown 0.7s 0.1s ease both;
+    }
+
+    .hero-logo em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--mint);
+    }
+
+    .hero-subtitle {
+      font-size: 0.78rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-top: 4px;
+      margin-bottom: 20px;
+      animation: fadeDown 0.7s 0.15s ease both;
+    }
+
+    .hero-divider {
+      width: 48px; height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--mint));
+      border-radius: 2px;
+      margin: 0 auto 20px;
+      animation: growX 0.8s 0.3s ease both;
+    }
+
+    @keyframes growX {
+      from { transform: scaleX(0); opacity: 0; }
+      to   { transform: scaleX(1); opacity: 1; }
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.92);
+      animation: fadeDown 0.7s 0.2s ease both;
+    }
+
+    .hero h1 strong { font-weight: 600; color: #fff; }
+
+    .hero p {
+      margin-top: 10px;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.5);
+      font-weight: 300;
+      max-width: 400px;
+      line-height: 1.7;
+      animation: fadeDown 0.7s 0.25s ease both;
+    }
+
+    /* ── STEPS ── */
+    .progress-wrap {
+      background: var(--forest);
+      padding: 0 32px 28px;
+    }
+
+    .steps {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+    }
+
+    .step-line {
+      position: absolute;
+      top: 15px; left: 50%;
+      width: 100%; height: 2px;
+      background: rgba(255,255,255,0.1);
+      z-index: 0;
+      transition: background 0.4s;
+    }
+
+    .step.done .step-line { background: rgba(111,191,151,0.4); }
+    .step:last-child .step-line { display: none; }
+
+    .step-circle {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: 2px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.78rem; font-weight: 600;
+      color: rgba(255,255,255,0.4);
+      position: relative; z-index: 1;
+      transition: all 0.3s;
+    }
+
+    .step.active .step-circle { background: var(--gold); border-color: var(--gold); color: var(--forest); }
+    .step.done .step-circle   { background: var(--mint); border-color: var(--mint); color: var(--forest); }
+
+    .step-label {
+      font-size: 0.65rem; letter-spacing: 0.5px;
+      color: rgba(255,255,255,0.35);
+      text-align: center; font-weight: 400; white-space: nowrap;
+    }
+
+    .step.active .step-label { color: var(--gold); font-weight: 500; }
+    .step.done .step-label   { color: var(--mint); }
+
+    /* ── FORM BODY ── */
+    .form-body {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 36px 20px 80px;
+      position: relative; z-index: 1;
+    }
+
+    /* ── PANELS ── */
+    .panel {
+      background: var(--warm);
+      border-radius: 20px;
+      border: 1px solid rgba(61,122,92,0.12);
+      box-shadow:
+        0 2px 0 rgba(26,60,46,0.04),
+        0 8px 32px rgba(26,60,46,0.07),
+        0 0 0 1px rgba(255,255,255,0.6) inset;
+      margin-bottom: 24px;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.55s ease forwards;
+    }
+
+    .panel:nth-child(1) { animation-delay: 0.1s; }
+    .panel:nth-child(2) { animation-delay: 0.2s; }
+    .panel:nth-child(3) { animation-delay: 0.3s; }
+    .panel:nth-child(4) { animation-delay: 0.4s; }
+
+    .panel-header {
+      background: linear-gradient(135deg, var(--forest) 0%, var(--sage) 100%);
+      padding: 18px 28px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .panel-icon {
+      width: 38px; height: 38px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+
+    .panel-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 600;
+      color: #fff; letter-spacing: 0.3px;
+    }
+
+    .panel-desc {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.5);
+      margin-top: 1px; font-weight: 300;
+    }
+
+    .panel-body { padding: 28px; }
+
+    /* ── FIELDS ── */
+    .field { margin-bottom: 20px; }
+    .field:last-child { margin-bottom: 0; }
+
+    .field label {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 0.73rem; font-weight: 600;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 7px;
+    }
+
+    .field label .req { color: var(--gold); font-size: 0.85rem; }
+
+    .field input[type="text"],
+    .field input[type="email"],
+    .field input[type="tel"],
+    .field input[type="date"],
+    .field input[type="number"],
+    .field select {
+      width: 100%;
+      padding: 13px 16px;
+      background: var(--parchment);
+      border: 1.5px solid rgba(61,122,92,0.18);
+      border-radius: 10px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      color: var(--ink);
+      outline: none;
+      transition: all 0.25s;
+      appearance: none;
+    }
+
+    .field input::placeholder { color: rgba(122,144,127,0.5); }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--sage);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(61,122,92,0.1);
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: 80px 100px 1fr; gap: 16px; }
+
+    /* ── CHIPS ── */
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 2px; }
+
+    .chip { position: relative; }
+    .chip input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+
+    .chip label {
+      display: flex; align-items: center; gap: 7px;
+      padding: 10px 18px;
+      background: var(--parchment);
+      border: 1.5px solid rgba(61,122,92,0.18);
+      border-radius: 50px;
+      font-size: 0.875rem; font-weight: 400;
+      color: var(--dust);
+      cursor: pointer; transition: all 0.2s;
+      letter-spacing: 0; text-transform: none;
+      user-select: none;
+    }
+
+    .chip label .chip-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      border: 2px solid currentColor;
+      transition: all 0.2s; flex-shrink: 0;
+    }
+
+    .chip input:checked + label {
+      background: var(--forest);
+      border-color: var(--forest);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(26,60,46,0.25);
+    }
+
+    .chip input:checked + label .chip-dot {
+      background: var(--gold); border-color: var(--gold);
+    }
+
+    /* ── FAMILY ── */
+    .family-grid { display: flex; flex-direction: column; gap: 10px; }
+
+    .col-header {
+      display: grid;
+      grid-template-columns: 2fr 65px 1.5fr 85px 95px 36px;
+      gap: 8px; padding: 0 14px 4px;
+    }
+
+    .col-header span {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 1px; text-transform: uppercase;
+      color: var(--dust);
+    }
+
+    .family-row {
+      display: grid;
+      grid-template-columns: 2fr 65px 1.5fr 85px 95px 36px;
+      gap: 8px; align-items: center;
+      background: var(--parchment);
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(61,122,92,0.1);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .family-row:hover {
+      border-color: rgba(61,122,92,0.25);
+      box-shadow: 0 2px 10px rgba(26,60,46,0.06);
+    }
+
+    .family-row input,
+    .family-row select {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1.5px solid rgba(61,122,92,0.15);
+      border-radius: 8px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.85rem;
+      background: #fff;
+      outline: none;
+      transition: border-color 0.2s;
+      appearance: none; -webkit-appearance: none;
+    }
+
+    .family-row input:focus,
+    .family-row select:focus {
+      border-color: var(--sage);
+      box-shadow: 0 0 0 3px rgba(61,122,92,0.08);
+    }
+
+    .family-row input::placeholder { color: rgba(122,144,127,0.4); font-size: 0.8rem; }
+
+    .del-btn {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      border: 1px solid rgba(200,60,60,0.15);
+      background: rgba(255,100,100,0.05);
+      color: rgba(180,60,60,0.45);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      transition: all 0.2s; flex-shrink: 0;
+    }
+
+    .del-btn:hover {
+      background: rgba(255,80,80,0.12);
+      border-color: rgba(200,60,60,0.3);
+      color: #c83c3c;
+    }
+
+    .add-member-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 14px; padding: 11px 20px;
+      background: transparent;
+      border: 2px dashed rgba(61,122,92,0.3);
+      border-radius: 10px;
+      color: var(--sage);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.85rem; font-weight: 500;
+      cursor: pointer; transition: all 0.2s;
+      width: 100%; justify-content: center;
+    }
+
+    .add-member-btn:hover {
+      background: rgba(61,122,92,0.05);
+      border-color: var(--sage);
+    }
+
+    /* ── SUBMIT ── */
+    .submit-area {
+      margin-top: 8px;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 16px;
+      opacity: 0;
+      animation: fadeUp 0.55s 0.5s ease forwards;
+    }
+
+    .submit-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, var(--forest), var(--sage));
+      color: #fff; border: none;
+      border-radius: 50px;
+      padding: 18px 60px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem; font-weight: 600; letter-spacing: 0.5px;
+      cursor: pointer; position: relative; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(26,60,46,0.35), 0 1px 0 rgba(255,255,255,0.15) inset;
+      transition: all 0.25s;
+    }
+
+    .submit-btn::before {
+      content: '';
+      position: absolute; top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    .submit-btn:hover::before { left: 100%; }
+    .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(26,60,46,0.4); }
+    .submit-btn:active { transform: translateY(-1px); }
+
+    .submit-note { font-size: 0.76rem; color: var(--dust); text-align: center; }
+
+    /* ── SUCCESS ── */
+    .success-screen {
+      display: none;
+      max-width: 480px;
+      margin: 60px auto;
+      padding: 60px 40px;
+      background: var(--warm);
+      border-radius: 24px;
+      border: 1px solid rgba(61,122,92,0.15);
+      box-shadow: 0 20px 60px rgba(26,60,46,0.12);
+      text-align: center;
+      position: relative; z-index: 1;
+      animation: popIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275) both;
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.85) translateY(20px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .success-ring {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--foam), var(--mint));
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 2rem;
+      box-shadow: 0 8px 24px rgba(111,191,151,0.4);
+    }
+
+    .success-screen h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; color: var(--forest);
+      margin-bottom: 12px;
+    }
+
+    .success-screen p { font-size: 0.92rem; color: var(--dust); line-height: 1.7; }
+
+    .gold-line {
+      width: 40px; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--mint));
+      border-radius: 2px;
+      margin: 18px auto;
+    }
+
+    .success-benefits {
+      margin-top: 24px;
+      background: var(--parchment);
+      border-radius: 14px;
+      border: 1px solid rgba(61,122,92,0.15);
+      padding: 18px 20px;
+      text-align: left;
+    }
+
+    .success-benefits-title {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .success-benefits-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .success-benefits-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      color: var(--ink);
+    }
+
+    .sb-icon {
+      width: 30px; height: 30px;
+      background: var(--foam);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── BENEFITS BANNER ── */
+    .benefits-banner {
+      max-width: 720px;
+      margin: 0 auto 28px;
+      background: linear-gradient(135deg, #2a1f08 0%, #3d2e0e 50%, #2a1f08 100%);
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(201,168,76,0.3);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15), 0 0 0 1px rgba(201,168,76,0.1) inset;
+      opacity: 0;
+      animation: fadeUp 0.55s 0.05s ease forwards;
+    }
+
+    .benefits-banner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 50%, rgba(201,168,76,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 90% 20%, rgba(111,191,151,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .benefits-header {
+      padding: 22px 28px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      position: relative;
+    }
+
+    .benefits-star {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--gold), #e8c96a);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(201,168,76,0.4);
+    }
+
+    .benefits-header-text .benefits-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.3px;
+    }
+
+    .benefits-header-text .benefits-sub {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.45);
+      font-weight: 300;
+      margin-top: 2px;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      padding: 6px 0 8px;
+    }
+
+    .benefit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 22px;
+      position: relative;
+      transition: background 0.2s;
+    }
+
+    .benefit-item:hover {
+      background: rgba(201,168,76,0.05);
+    }
+
+    .benefit-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 22px; right: 22px;
+      height: 1px;
+      background: rgba(201,168,76,0.1);
+    }
+
+    .benefit-item:nth-last-child(1)::after,
+    .benefit-item:nth-last-child(2)::after { display: none; }
+
+    .benefit-icon-wrap {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .benefit-info .benefit-qty {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2px;
+    }
+
+    .benefit-info .benefit-name {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.85);
+      font-weight: 400;
+      line-height: 1.3;
+    }
+
+    .benefit-info .benefit-obs {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.35);
+      margin-top: 2px;
+      font-style: italic;
+    }
+
+    .benefits-footer {
+      padding: 12px 22px 18px;
+      text-align: center;
+      font-size: 0.74rem;
+      color: rgba(255,255,255,0.3);
+      border-top: 1px solid rgba(201,168,76,0.12);
+      font-style: italic;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 560px) {
+      .benefits-grid { grid-template-columns: 1fr; }
+      .benefit-item:nth-last-child(2)::after { display: block; }
+    }
+      .hero-logo { font-size: 2.3rem; }
+      .hero h1 { font-size: 1.4rem; }
+      .panel-body { padding: 20px 18px; }
+      .panel-header { padding: 16px 20px; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .col-header { display: none; }
+      .family-row { grid-template-columns: 1fr 1fr; }
+      .submit-btn { padding: 16px 36px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"><span></span><span></span><span></span></div>
+  <div class="hero-content">
+    <div class="badge"><div class="badge-dot"></div><span>Cadastro Aberto</span></div>
+    <div class="hero-logo">Sara <em>Social</em></div>
+    <div class="hero-subtitle">Palhoça · SC</div>
+    <div class="hero-divider"></div>
+    <h1>Ficha Cadastral —<br/><strong>Cesta Básica</strong></h1>
+    <p>Preencha as informações abaixo para solicitar o benefício. Todos os dados são tratados com sigilo e responsabilidade.</p>
+  </div>
+</header>
+
+<div class="progress-wrap">
+  <div class="steps" id="stepsBar">
+    <div class="step active">
+      <div class="step-circle">1</div>
+      <div class="step-label">Responsável</div>
+      <div class="step-line"></div>
+    </div>
+    <div class="step">
+      <div class="step-circle">2</div>
+      <div class="step-label">Endereço</div>
+      <div class="step-line"></div>
+    </div>
+    <div class="step">
+      <div class="step-circle">3</div>
+      <div class="step-label">Família</div>
+      <div class="step-line"></div>
+    </div>
+    <div class="step">
+      <div class="step-circle">4</div>
+      <div class="step-label">Profissão</div>
+    </div>
+  </div>
+</div>
+
+<div class="form-body">
+
+  <!-- BENEFITS BANNER -->
+  <div class="benefits-banner">
+    <div class="benefits-header">
+      <div class="benefits-star">🎁</div>
+      <div class="benefits-header-text">
+        <div class="benefits-title">Benefícios Incluídos no Cadastro</div>
+        <div class="benefits-sub">Ao se cadastrar, você tem direito a todos os itens abaixo</div>
+      </div>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-item">
+        <div class="benefit-icon-wrap">🧺</div>
+        <div class="benefit-info">
+          <div class="benefit-qty">3 auxílios</div>
+          <div class="benefit-name">Cesta Básica</div>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon-wrap">✂️</div>
+        <div class="benefit-info">
+          <div class="benefit-qty">3 sessões</div>
+          <div class="benefit-name">Corte de Cabelo</div>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon-wrap">👗</div>
+        <div class="benefit-info">
+          <div class="benefit-qty">1 kit</div>
+          <div class="benefit-name">Roupas do Bazar</div>
+          <div class="benefit-obs">Calçado, calça, camisa e casaco</div>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon-wrap">🧠</div>
+        <div class="benefit-info">
+          <div class="benefit-qty">1 sessão</div>
+          <div class="benefit-name">Orientação Psicológica</div>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon-wrap">📄</div>
+        <div class="benefit-info">
+          <div class="benefit-qty">1 auxílio</div>
+          <div class="benefit-name">Elaboração de Currículo</div>
+        </div>
+      </div>
+    </div>
+    <div class="benefits-footer">
+      ✦ Kit de roupas sujeito à disponibilidade do bazar ✦
+    </div>
+  </div>
+
+<form id="mainForm" novalidate>
+
+  <div class="panel">
+    <div class="panel-header">
+      <div class="panel-icon">👤</div>
+      <div>
+        <div class="panel-title">Dados do Responsável</div>
+        <div class="panel-desc">Informações pessoais de quem solicita o benefício</div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="field">
+        <label>Nome completo <span class="req">*</span></label>
+        <input type="text" name="nome" placeholder="Seu nome completo" required/>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label>Data de nascimento <span class="req">*</span></label>
+          <input type="date" name="nascimento" required/>
+        </div>
+        <div class="field">
+          <label>Telefone / WhatsApp <span class="req">*</span></label>
+          <input type="tel" name="telefone" placeholder="(48) 99999-9999" required/>
+        </div>
+      </div>
+      <div class="field">
+        <label>E-mail</label>
+        <input type="email" name="email" placeholder="seu@email.com"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <div class="panel-icon">📍</div>
+      <div>
+        <div class="panel-title">Endereço</div>
+        <div class="panel-desc">Onde você reside atualmente</div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="field">
+        <label>Rua / Avenida <span class="req">*</span></label>
+        <input type="text" name="rua" placeholder="Nome da rua ou avenida" required/>
+      </div>
+      <div class="grid-3">
+        <div class="field">
+          <label>Número</label>
+          <input type="text" name="numero" placeholder="Nº"/>
+        </div>
+        <div class="field">
+          <label>Complemento</label>
+          <input type="text" name="complemento" placeholder="Apto…"/>
+        </div>
+        <div class="field">
+          <label>Bairro <span class="req">*</span></label>
+          <input type="text" name="bairro" placeholder="Nome do bairro" required/>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label>Cidade <span class="req">*</span></label>
+          <input type="text" name="cidade" placeholder="Cidade" required/>
+        </div>
+        <div class="field">
+          <label>Tipo de moradia <span class="req">*</span></label>
+          <div class="chips" style="margin-top:8px">
+            <div class="chip"><input type="radio" name="moradia" id="m1" value="Própria" required/><label for="m1"><span class="chip-dot"></span>Própria</label></div>
+            <div class="chip"><input type="radio" name="moradia" id="m2" value="Alugada"/><label for="m2"><span class="chip-dot"></span>Alugada</label></div>
+            <div class="chip"><input type="radio" name="moradia" id="m3" value="Cedida"/><label for="m3"><span class="chip-dot"></span>Cedida</label></div>
+            <div class="chip"><input type="radio" name="moradia" id="m4" value="Outro"/><label for="m4"><span class="chip-dot"></span>Outro</label></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <div class="panel-icon">👨‍👩‍👧</div>
+      <div>
+        <div class="panel-title">Composição Familiar</div>
+        <div class="panel-desc">Pessoas que residem com você</div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="col-header">
+        <span>Nome</span><span>Idade</span><span>Parentesco</span><span>Estuda?</span><span>Trabalha?</span><span></span>
+      </div>
+      <div class="family-grid" id="familyGrid"></div>
+      <button type="button" class="add-member-btn" id="addMemberBtn">
+        <span>＋</span> Adicionar membro da família
+      </button>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      <div class="panel-icon">💼</div>
+      <div>
+        <div class="panel-title">Situação Profissional</div>
+        <div class="panel-desc">Sua ocupação e vínculo de trabalho atual</div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="field">
+        <label>Profissão / Ocupação</label>
+        <input type="text" name="profissao" placeholder="Ex: diarista, autônomo(a), aposentado(a)…"/>
+      </div>
+      <div class="field">
+        <label>Situação atual <span class="req">*</span></label>
+        <div class="chips">
+          <div class="chip"><input type="radio" name="vinculo" id="v1" value="Empregado(a)" required/><label for="v1"><span class="chip-dot"></span>Empregado(a)</label></div>
+          <div class="chip"><input type="radio" name="vinculo" id="v2" value="Desempregado(a)"/><label for="v2"><span class="chip-dot"></span>Desempregado(a)</label></div>
+          <div class="chip"><input type="radio" name="vinculo" id="v3" value="Autônomo(a)"/><label for="v3"><span class="chip-dot"></span>Autônomo(a)</label></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="submit-area">
+    <button type="submit" class="submit-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+      Enviar Cadastro
+    </button>
+    <p class="submit-note">🔒 Seus dados são tratados com total sigilo e privacidade</p>
+  </div>
+
+</form>
+
+<div class="success-screen" id="successScreen">
+  <div class="success-ring">🌿</div>
+  <h2>Cadastro Enviado!</h2>
+  <div class="gold-line"></div>
+  <p>Suas informações foram registradas com sucesso.<br/>Em breve nossa equipe entrará em contato.</p>
+
+  <div class="success-benefits">
+    <div class="success-benefits-title">Seus benefícios garantidos</div>
+    <ul class="success-benefits-list">
+      <li><span class="sb-icon">🧺</span><span><strong>3 auxílios</strong> de cesta básica</span></li>
+      <li><span class="sb-icon">✂️</span><span><strong>3 cortes</strong> de cabelo</span></li>
+      <li><span class="sb-icon">👗</span><span><strong>1 kit de roupas</strong> do bazar <em>(conforme disponibilidade)</em></span></li>
+      <li><span class="sb-icon">🧠</span><span><strong>1 orientação</strong> psicológica</span></li>
+      <li><span class="sb-icon">📄</span><span><strong>1 auxílio</strong> para elaboração de currículo</span></li>
+    </ul>
+  </div>
+
+  <p style="margin-top:20px; font-size:0.8rem; color:var(--dust)">Obrigado por confiar no <strong>Sara Social Palhoça</strong> 💚</p>
+</div>
+
+</div>
+
+<script>
+  const grid = document.getElementById('familyGrid');
+
+  function createRow() {
+    const div = document.createElement('div');
+    div.className = 'family-row';
+    div.innerHTML = `
+      <input type="text" placeholder="Nome completo"/>
+      <input type="number" min="0" max="120" placeholder="Idade"/>
+      <input type="text" placeholder="Parentesco"/>
+      <select><option value="">—</option><option>Sim</option><option>Não</option></select>
+      <select><option value="">—</option><option>Sim</option><option>Não</option></select>
+      <button type="button" class="del-btn" title="Remover">×</button>
+    `;
+    div.querySelector('.del-btn').addEventListener('click', () => {
+      div.style.transition = 'all 0.2s';
+      div.style.opacity = '0'; div.style.transform = 'scale(0.95)';
+      setTimeout(() => div.remove(), 200);
+    });
+    return div;
+  }
+
+  for (let i = 0; i < 3; i++) grid.appendChild(createRow());
+
+  document.getElementById('addMemberBtn').addEventListener('click', () => {
+    const row = createRow();
+    row.style.opacity = '0'; row.style.transform = 'translateY(8px)';
+    grid.appendChild(row);
+    requestAnimationFrame(() => {
+      row.style.transition = 'all 0.25s ease';
+      row.style.opacity = '1'; row.style.transform = 'translateY(0)';
+    });
+  });
+
+  document.querySelector('[name="telefone"]').addEventListener('input', function() {
+    let v = this.value.replace(/\D/g,'').slice(0,11);
+    if (v.length > 6) v = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+    else if (v.length > 2) v = `(${v.slice(0,2)}) ${v.slice(2)}`;
+    else if (v.length) v = `(${v}`;
+    this.value = v;
+  });
+
+  // Scroll step tracking
+  const panels = document.querySelectorAll('.panel');
+  const stepEls = document.querySelectorAll('.step');
+  new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = [...panels].indexOf(entry.target);
+        stepEls.forEach((s, i) => {
+          s.classList.toggle('active', i === idx);
+          s.classList.toggle('done', i < idx);
+        });
+      }
+    });
+  }, { threshold: 0.5 }).observe || panels.forEach((p, i) => {
+    new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        stepEls.forEach((s, j) => {
+          s.classList.toggle('active', j === i);
+          s.classList.toggle('done', j < i);
+        });
+      }
+    }, { threshold: 0.5 }).observe(p);
+  });
+
+  panels.forEach((p, i) => {
+    new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        stepEls.forEach((s, j) => {
+          s.classList.toggle('active', j === i);
+          s.classList.toggle('done', j < i);
+        });
+      }
+    }, { threshold: 0.5 }).observe(p);
+  });
+
+  document.getElementById('mainForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (!this.checkValidity()) { this.reportValidity(); return; }
+    this.style.transition = 'opacity 0.35s';
+    this.style.opacity = '0';
+    setTimeout(() => {
+      this.style.display = 'none';
+      const s = document.getElementById('successScreen');
+      s.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 350);
+  });
+</script>
+</body>
+</html>
